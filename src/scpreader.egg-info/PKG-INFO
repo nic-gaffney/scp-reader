@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: scpreader
+Version: 0.2.5
+Summary: Read the scp wiki from the terminal
+Home-page: https://github.com/gaffclant/scp-reader
+Author: Gaffclant
+Author-email: gaffclant@gmail.com
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/gaffclant/scp-reader/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# scp-reader
+Read the SCP wiki from the terminal
+
+
