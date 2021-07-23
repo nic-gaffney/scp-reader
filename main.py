@@ -7,13 +7,13 @@ from time import sleep
 import requests
 from bs4 import BeautifulSoup
 
-
-def rprint(no):
+def rprint(no, text):
     no = str(no)
-    print(no.center(shutil.get_terminal_size().columns))
+    text += (no.center(shutil.get_terminal_size().columns) + "\n")
+    return text
 
 
-rprint("""\
+print("""\
                  ,#############,
                  ##           ##
              m####             ####m
@@ -41,6 +41,7 @@ rprint("""\
 def help():
     print("Type an scp number to see the entry\n")
     print("logout: Exit SCP-OS\n")
+    print("save: Save the previous SCP data to SCPNUMBER.txt\n")
     print("help: See this page\n")
     print('r: random scp\n')
 
@@ -55,6 +56,8 @@ def set_num(num):
 
 
 help()
+main_text = ""
+prev_scp = 'NO_SCP'
 while True:
     command = input(f'\n\n:')
     if command == '':
@@ -62,17 +65,21 @@ while True:
     elif command == 'help':
         help()
     elif command == 'logout':
-        rprint("Shutting down...\n")
+        print("Shutting down...\n")
         quit()
     elif command == '001':
-        rprint('UNAUTHORIZED ACCESS.')
+        print('UNAUTHORIZED ACCESS.')
         quit()
+    elif command == 'save':
+        with open(f'{prev_scp}.txt', 'w') as f:
+            f.write(main_text)
     else:
         if command == 'r':
+            main_text = ""
             command = random.randint(0, 6000)
             command = set_num(command)
         URL = f"http://www.scpwiki.com/scp-{command}"
-
+        main_text = ""
         page = requests.get(URL)
         soup = BeautifulSoup(page.content, 'html.parser')
         # title = soup.find(id='page-title').text.strip()
@@ -80,5 +87,9 @@ while True:
         for child in page.children:
             schild = str(child)
             if schild[0:3] == '<p>':
-                rprint(child.text.strip())
-                print()
+                main_text = rprint(child.text.strip(), main_text)
+            elif schild[0:12] == '<blockquote>':
+                main_text = rprint(child.text.strip(), main_text)
+        print(main_text)
+        prev_scp = command
+
