@@ -1,3 +1,2 @@
-shutil
 requests
 bs4
