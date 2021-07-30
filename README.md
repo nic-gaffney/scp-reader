@@ -5,6 +5,11 @@ Read the SCP wiki from the terminal!
 You need python 3.9 (I haven't tested with lower versions) and the packages in `requirements.txt`
 
 ## Install
+### Arch
+Avalible in the AUR
+`yay -S python-scpreader`
+
+### Other
 Availible through pip
 
 
